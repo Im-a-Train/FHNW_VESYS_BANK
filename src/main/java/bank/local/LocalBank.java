@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class LocalBank implements bank.Bank {
 
-    private final Map<String, LocalAccount> accounts = new HashMap<>();
+    protected final Map<String, LocalAccount> accounts = new HashMap<>();
 
     @Override
     public Set<String> getAccountNumbers() {

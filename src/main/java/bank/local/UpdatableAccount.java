@@ -7,7 +7,7 @@ import bank.OverdrawException;
 import java.io.IOException;
 
 class UpdatableAccount extends LocalAccount{
-    private final BankDriver2.UpdateHandler handler;
+    private final transient BankDriver2.UpdateHandler handler;
 
     public UpdatableAccount(String number, BankDriver2.UpdateHandler handler){
         super(number);

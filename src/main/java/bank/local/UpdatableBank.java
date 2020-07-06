@@ -10,19 +10,22 @@ import java.io.IOException;
 public class UpdatableBank extends LocalBank{
     private final BankDriver2.UpdateHandler handler;
     public UpdatableBank(BankDriver2.UpdateHandler handler){
+        super();
         this.handler = handler;
     }
 
+
     @Override
     public String createAccount(String owner) throws IOException {
-        String accountId = super.createAccount(owner);
-        if(accountId != null) handler.accountChanged(accountId);
-        return accountId;
+        UpdatableAccount newAccount = new UpdatableAccount(owner, handler);
+        accounts.put(newAccount.getNumber(), newAccount);
+        if(newAccount.getNumber() != null) handler.accountChanged(newAccount.getNumber());
+        return newAccount.getNumber();
     }
 
     @Override
     public LocalAccount getAccount(String number){
-        return new UpdatableAccount(number, handler);
+        return accounts.get(number);
     }
 
     @Override
